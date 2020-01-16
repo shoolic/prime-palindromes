@@ -1,3 +1,4 @@
 outputs
 plots
 .vscode
+__pycache__
