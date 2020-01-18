@@ -1,6 +1,7 @@
 import argparse
 import sys
 import random
+import matplotlib.pyplot as plt
 
 import algorithm
 import analytics
@@ -39,9 +40,7 @@ def do_analytics(args):
                         filename=args.table)
 
     if args.graph is not None:
-        analytics.graph(n_list=analytics_results["n_list"],
-                        measured_times=analytics_results["measured_times"],
-                        args=args)
+        analytics.graph(analytics_results=analytics_results, args=args)
 
     if args.verify:
         analytics.compare_range_with_brute(
@@ -133,8 +132,6 @@ def main():
         help='filename where to save the time measurement graph')
 
     args = parser.parse_args()
-
-    print(args)  #todo delete
 
     if args.mode == 'stdio':
         do_io(args)
