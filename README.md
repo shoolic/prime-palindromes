@@ -12,7 +12,7 @@ Find a first prime palindromic number greater than `N`.
 
 ### Algorithm input
 
-N - natural number in the range from `1` to `10^9`.
+N - natural number in the range from `1` to `10^8`.
 
 ### Algorithm output
 
@@ -48,6 +48,7 @@ First prime palindromic number greater than `N`.
 
 - `Python 3.7+`
 - `matplotlib`
+- `numpy`
 
 ### Usage
 
