@@ -16,16 +16,12 @@ def is_prime_sqrt_std(n):
 
 
 def generate_palindrome_from_half(left_half):
-    left_part_str = str(left_half)
+    left_half_str = str(left_half)
 
-    # change = {'2': '3', '4': '7', '5': '7', '6': '7', '8': '9'}
+    # prevent mirroring left half if first digit is 2, 4, 5, 6, 8 (for sure it will not be prime)
+    left_half_str = adjust_l_str_first_digit(left_half_str)
 
-    # if left_part_str[0] in change.keys():
-    #     print("zamieniam")
-    #     left_part_str = change[left_part_str[0]] + "0" * (len(left_part_str) -
-    #                                                       1)
-
-    full_str = left_part_str + left_part_str[::-1][1:]
+    full_str = left_half_str + left_half_str[::-1][1:]
     palindrome = int(full_str)
 
     return palindrome
@@ -41,11 +37,22 @@ def get_left_half_num(n):
     return int(n_str[0:half_length])
 
 
-def get_adjusted_left_half(left_half, N):
-    if get_num_length(N) % 2 == 0:
-        return 10**math.ceil(math.log10(N))
-    elif generate_palindrome_from_half(left_half) <= N:
-        return left_half + 1
+def adjust_n_first_digit(N):
+    change = {'2': '3', '4': '7', '5': '7', '6': '7', '8': '9'}
+    N_str = str(N)
+    if N_str[0] in change.keys():
+        N = int(change[N_str[0]] + "0" * (len(N_str) - 1))
+
+    return N
+
+
+def adjust_l_str_first_digit(left_half_str):
+    change = {'2': '3', '4': '7', '5': '7', '6': '7', '8': '9'}
+
+    if left_half_str[0] in change.keys():
+        left_half_str = change[left_half_str[0]] + left_half_str[1:]
+
+    return left_half_str
 
 
 def find_first_greater_prime_palindrome(N):
@@ -56,23 +63,17 @@ def find_first_greater_prime_palindrome(N):
         if N < p:
             return p
 
-    # forbidden = [2,4,5,6,8,0]
-    # test = int(str(N)[0])
-    # if test in forbidden:
-    #     test+=1
-    #     return find_first_greater_prime_palindrome(int(str(test) + "0" * (len(str(N))-1)))
+    # prevent mirroring N if first digit is 2, 4, 5, 6, 8 (for sure it will not be prime)
+    N = adjust_n_first_digit(N)
 
-    change = {'2': '3', '4': '7', '5': '7', '6': '7', '8': '9'}
-    N_str = str(N)
-    if N_str[0] in change.keys():
-        N = int(change[N_str[0]] + "0" * (len(N_str) - 1))
-
-    left_half = get_left_half_num(N)
     # every palindrome greater than 11 with even number of digits is divisable by 11
     # to skip generating palindromes with even number of digits
     # round left_half up to the nearest power of 10
+    left_half = get_left_half_num(N)
+
     if get_num_length(N) % 2 == 0:
         left_half = 10**(math.floor(math.log10(left_half)) + 1)
+    # fix left half if it generates palindrome less than N
     elif generate_palindrome_from_half(left_half) <= N:
         left_half += 1
 
