@@ -63,3 +63,4 @@ to see how to use program.
 - `prime_palindrome_finder.py` - ui module
 - `algorithm.py` - algorithm module
 - `analytics.py` - analytics tools module
+- `unit_tests.py` - algorithm unit tests
