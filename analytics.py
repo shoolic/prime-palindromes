@@ -1,3 +1,7 @@
+# Prime palindrome finder
+# Analysis of algorithms classes at Faculty of Electronics and Information Technology, Warsaw University of Technology
+# Maciej Szulik 2019 - 2020
+
 import time
 import csv
 import matplotlib.pyplot as plt
