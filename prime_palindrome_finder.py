@@ -55,7 +55,7 @@ def do_analytics(args):
 def main():
     parser = argparse.ArgumentParser(
         description=
-        'Find first prime palindrome greater than a number from the range [0, 10^9].'
+        'Find first prime palindrome greater than a number from the range [0, 10^8].'
     )
 
     parser.add_argument(
